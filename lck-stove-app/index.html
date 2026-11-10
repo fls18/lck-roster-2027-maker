@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LCK 2027 스토브리그 시뮬레이터</title>
+<meta name="description" content="2026 LCK 로스터 기준으로 2027 스토브리그 이적을 예상해 보는 시뮬레이터">
+<meta name="theme-color" content="#1b1c2b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="스토브리그">
+<link rel="preload" href="fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // 저장된 테마·글자 크기를 화면 그리기 전에 적용 (깜빡임 방지)
+  try { var s = JSON.parse(localStorage.getItem('lck-stove-2027') || '{}').settings || {};
+    document.documentElement.dataset.theme = s.theme || 'dark';
+    document.documentElement.style.fontSize = (s.font || 16) + 'px'; } catch (e) {}
+</script>
+</head>
+<body data-tab="teams">
+
+<header class="top">
+  <div class="brand">
+    <span class="mark">LCK</span>
+    <div class="brand-text">
+      <h1>스토브리그 2027</h1>
+      <p id="summary" class="summary"></p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <label class="check"><input type="checkbox" id="tgCoach"><span>감독</span></label>
+    <label class="check"><input type="checkbox" id="tgAcad"><span>2군</span></label>
+    <button class="icon-btn" id="bTheme" aria-label="화면 모드 전환"></button>
+    <button class="btn" id="bSet">설정</button>
+  </div>
+</header>
+
+<div class="layout">
+  <section class="view view-teams" aria-label="팀">
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="text-btn" id="bStay">계약 만료자 전원 잔류</button>
+        <button class="text-btn" id="bClear">전원 미정으로</button>
+      </div>
+      <button class="text-btn" id="bCopy">라인업 텍스트 복사</button>
+    </div>
+    <div id="grid" class="grid"></div>
+    <p class="legend">
+      <span class="chip sample"><span class="nm">이름</span><i class="ic-lock"></i></span> 2027년 이후까지 계약
+      <span class="chip sample fa"><span class="nm">이름</span></span> 계약 만료 · 재계약
+      <span class="chip sample fa new"><span class="nm">이름</span><span class="from">HLE</span></span> 영입 (원소속)
+    </p>
+  </section>
+
+  <aside class="view view-roster" id="roster" aria-label="선수 명단">
+    <div class="roster-head">
+      <div class="roster-title">선수 명단 <span>2026 소속</span></div>
+      <input class="input" id="q" type="search" placeholder="이름 검색" autocomplete="off">
+      <div class="seg seg-sm" id="pf"></div>
+      <div class="roster-filters">
+        <label class="check sm"><input type="checkbox" id="onlyFA"><span>계약 만료자만</span></label>
+        <label class="check sm"><input type="checkbox" id="onlyUndec"><span>미정만</span></label>
+      </div>
+    </div>
+    <div id="list" class="list"></div>
+    <form class="add" id="addf">
+      <input class="input" id="addn" placeholder="선수·감독 추가 (해외파, 신인 등)" maxlength="20" autocomplete="off">
+      <select class="input" id="addp" aria-label="포지션">
+        <option>TOP</option><option>JGL</option><option>MID</option><option>BOT</option><option>SPT</option><option value="HC">감독</option>
+      </select>
+      <button class="btn" type="submit">추가</button>
+    </form>
+  </aside>
+</div>
+
+<nav class="tabbar" aria-label="화면 전환">
+  <button data-tab="teams" class="on">팀</button>
+  <button data-tab="roster">선수 명단</button>
+  <button data-open="settings">설정</button>
+</nav>
+
+<div class="sheet-wrap" id="sheet" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "LCK 2027 스토브리그 시뮬레이터",
+  "short_name": "스토브리그",
+  "description": "2026 LCK 로스터 기준 2027 스토브리그 예상 시뮬레이터",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1b1c2b",
+  "theme_color": "#1b1c2b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
